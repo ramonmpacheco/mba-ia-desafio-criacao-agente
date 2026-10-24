@@ -1,0 +1,5 @@
+simulation: aurora-gemini-contract
+routing: path
+mocks:
+  - routeKey: gemini
+    path: ../mocks/gemini/config.yaml
