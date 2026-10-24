@@ -1,0 +1,493 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Residencial Aurora",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/sessoes": {
+      "post": {
+        "summary": "Create Session",
+        "operationId": "create_session_sessoes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Created"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessoes/{session_id}/mensagens": {
+      "post": {
+        "summary": "Message",
+        "operationId": "message_sessoes__session_id__mensagens_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reply"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sessão inexistente"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessoes/{session_id}/confirmacoes": {
+      "post": {
+        "summary": "Confirm",
+        "operationId": "confirm_sessoes__session_id__confirmacoes_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reply"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sessão inexistente"
+          },
+          "409": {
+            "description": "Confirmação não pendente nesta sessão"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessoes/{session_id}/eventos": {
+      "get": {
+        "summary": "Events",
+        "operationId": "events_sessoes__session_id__eventos_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response Events Sessoes  Session Id  Eventos Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sessão inexistente"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartamentos/{apartamento}/reservas": {
+      "get": {
+        "summary": "Reservations",
+        "operationId": "reservations_apartamentos__apartamento__reservas_get",
+        "parameters": [
+          {
+            "name": "apartamento",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Apartamento"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  },
+                  "title": "Response Reservations Apartamentos  Apartamento  Reservas Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartamentos/{apartamento}/visitantes": {
+      "get": {
+        "summary": "Visitors",
+        "operationId": "visitors_apartamentos__apartamento__visitantes_get",
+        "parameters": [
+          {
+            "name": "apartamento",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Apartamento"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Visitor"
+                  },
+                  "title": "Response Visitors Apartamentos  Apartamento  Visitantes Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConfirmationInput": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Id"
+          },
+          "confirmado": {
+            "type": "boolean",
+            "title": "Confirmado"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "confirmado"
+        ],
+        "title": "ConfirmationInput"
+      },
+      "Created": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "title": "Created"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MessageInput": {
+        "properties": {
+          "texto": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Texto"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "texto"
+        ],
+        "title": "MessageInput"
+      },
+      "Pending": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "acao": {
+            "type": "string",
+            "title": "Acao"
+          },
+          "detalhes": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Detalhes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "acao",
+          "detalhes"
+        ],
+        "title": "Pending"
+      },
+      "Reply": {
+        "properties": {
+          "resposta": {
+            "type": "string",
+            "title": "Resposta"
+          },
+          "confirmacoes_pendentes": {
+            "items": {
+              "$ref": "#/components/schemas/Pending"
+            },
+            "type": "array",
+            "title": "Confirmacoes Pendentes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "resposta",
+          "confirmacoes_pendentes"
+        ],
+        "title": "Reply"
+      },
+      "Reservation": {
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "title": "Codigo"
+          },
+          "area": {
+            "type": "string",
+            "title": "Area"
+          },
+          "data": {
+            "type": "string",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "codigo",
+          "area",
+          "data"
+        ],
+        "title": "Reservation"
+      },
+      "SessionInput": {
+        "properties": {
+          "apartamento": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Apartamento"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "apartamento"
+        ],
+        "title": "SessionInput"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Visitor": {
+        "properties": {
+          "nome": {
+            "type": "string",
+            "title": "Nome"
+          },
+          "data": {
+            "type": "string",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nome",
+          "data"
+        ],
+        "title": "Visitor"
+      }
+    }
+  }
+}
