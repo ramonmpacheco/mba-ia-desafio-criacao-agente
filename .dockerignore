@@ -1,0 +1,10 @@
+*
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!.python-version
+!aurora/
+!aurora/**
+!dados/
+!dados/**
+aurora/**/__pycache__/
