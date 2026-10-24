@@ -1,0 +1,10 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    environment:
+      AURORA_STATE_DIR: /app/.state
+    volumes:
+      - ./.state:/app/.state
+    ports:
+      - "127.0.0.1:8000:8000"
